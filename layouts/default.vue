@@ -7,7 +7,6 @@
 <style lang="scss" scoped>
 .container {
   max-width: 960px;
-  margin: 20px auto;
   padding: 0 15px;
   @screen md {
     padding: 0;

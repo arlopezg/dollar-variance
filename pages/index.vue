@@ -1,88 +1,36 @@
 <template>
   <div class="container">
     <div>
-      <line-chart
-        v-if="currencyData"
-        :data="currencyData"
-        :key="selectedCurrency"
-      />
-
-      <SectionHeader title="Bienvenido" font-size="2xl" />
+      <SectionHeader title="¡Hola!" font-size="2xl" />
       <p>
-        En esta aplicación podrás evaluar la fluctuación diaria de diferentes
-        divisas, incluyendo el dólar americano.
+        En esta aplicación podrás evaluar la fluctuación diaria del dólar en un
+        rango de tiempo.
       </p>
 
-      <label>
-        <strong>Ver divisa</strong>
-        <Select
-          v-if="availableCurrencies.length"
-          v-model="selectedCurrency"
-          :options="availableCurrencies"
-          @change="setCurrency(selectedCurrency)"
-          class="mx-auto"
-        >
-          <option :value="undefined" disabled>
-            Lista de divisas disponibles
-          </option>
-        </Select>
-      </label>
+      <img
+        src="/undraw/stepping_up.svg"
+        alt="Fluctuación de divisas"
+        class="mx-auto h-48 my-5"
+      />
+
+      <p class="hidden md:block">
+        <strong class="block text-center">¿Comenzamos?</strong>
+        Puedes iniciar viendo
+        <nuxt-link type="button" to="/variacion" class="text-blue-500">
+          la fluctuación del dolar americano
+        </nuxt-link>
+        los últimos 30 días
+      </p>
+
+      <nuxt-link
+        to="/variacion"
+        class="block md:hidden bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow"
+      >
+        Comenzar
+      </nuxt-link>
     </div>
   </div>
 </template>
-
-<script>
-import { mapActions, mapState } from 'vuex';
-
-export default {
-  data() {
-    return { selectedCurrency: null };
-  },
-  computed: {
-    ...mapState('currency', ['currencies', 'currency']),
-    currencyData() {
-      if (!this.currency) {
-        return null;
-      }
-
-      const { serie } = this.currency;
-      return {
-        labels: serie.map((item) => item.fecha),
-        datasets: [
-          {
-            label: `Precios de ${this.currency.nombre}`,
-            data: serie.map((item) => item.valor)
-          }
-        ]
-      };
-    },
-    availableCurrencies() {
-      if (!this.currencies) {
-        return [];
-      }
-
-      return this.currencies.map((currency) => ({
-        label: currency.nombre,
-        value: currency.codigo
-      }));
-    }
-  },
-  methods: {
-    ...mapActions('currency', ['getCurrencyValues', 'getAllCurrencies']),
-    setCurrency(currency = '') {
-      this.getCurrencyValues(currency);
-    }
-  },
-  created() {
-    this.getAllCurrencies();
-  },
-  watch: {
-    selectedCurrency(currency = '') {
-      this.getCurrencyValues(currency);
-    }
-  }
-};
-</script>
 
 <style>
 /* Sample `apply` at-rules with Tailwind CSS
