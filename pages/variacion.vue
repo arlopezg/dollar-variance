@@ -58,7 +58,7 @@ export default {
     };
   },
   computed: {
-    ...mapState('currency', ['currencies', 'currency']),
+    ...mapState('currency', ['currency']),
     currencyData() {
       if (!this.currency) {
         return null;
@@ -77,23 +77,12 @@ export default {
           }
         ]
       };
-    },
-    availableCurrencies() {
-      if (!this.currencies) {
-        return [];
-      }
-
-      return this.currencies.map((currency) => ({
-        label: currency.nombre,
-        value: currency.codigo
-      }));
     }
   },
   methods: {
-    ...mapActions('currency', ['getCurrencyValues', 'getAllCurrencies'])
+    ...mapActions('currency', ['getCurrencyValues'])
   },
   mounted() {
-    this.getAllCurrencies();
     this.getCurrencyValues(this.$route.params.id);
   }
 };
