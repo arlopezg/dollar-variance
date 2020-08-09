@@ -1,13 +1,15 @@
 <template>
-  <article class="flex flex-col-reverse md:flex-row">
-    <main class="w-full md:w-2/3">
+  <article
+    class="flex flex-col-reverse md:flex-row justify-center items-center"
+  >
+    <main class="relative max-h-screen w-full md:w-1/2">
       <line-chart
         v-if="currencyData"
         :data="currencyData"
         :options="chartOptions"
       />
     </main>
-    <aside class="w-full md:w-1/3 flex flex-col">
+    <aside class="w-full md:w-1/6 flex flex-col">
       <strong>Buscador por año</strong>
       <label>
         <strong>Desde</strong>
