@@ -14,7 +14,7 @@ describe('CurrencyService', () => {
       NETWORK_ERROR
     );
   });
-  it('Should return all currencies actual state', async () => {
+  it('Should retrieve all currencies actual state', async () => {
     expect.assertions(2);
 
     const data = {
@@ -26,12 +26,12 @@ describe('CurrencyService', () => {
     };
 
     axios.get.mockResolvedValue(data);
-    const response = await CurrencyService.getCurrenciesState();
+    const currentState = await CurrencyService.getCurrenciesState();
 
-    expect(response.dolar.valor).toBe(123);
-    expect(response.uf.valor).toBe(123);
+    expect(currentState.dolar.valor).toBe(123);
+    expect(currentState.uf.valor).toBe(123);
   });
-  it(`Should return USD last month's values`, async () => {
+  it(`Should retrieve USD last month's values`, async () => {
     expect.assertions(2);
 
     const data = {
@@ -41,16 +41,37 @@ describe('CurrencyService', () => {
     };
 
     axios.get.mockResolvedValue(data);
-    const response = await CurrencyService.getCurrencyValuesFromLastMonth('');
+    const valuesFromLastMonth = await CurrencyService.getCurrencyValuesFromLastMonth(
+      ''
+    );
 
-    expect(response.codigo).toBe('dolar');
-    expect(Array.isArray(response.serie)).toBe(true);
+    expect(valuesFromLastMonth.codigo).toBe('dolar');
+    expect(Array.isArray(valuesFromLastMonth.serie)).toBe(true);
+  });
+  it('Should retrieve currency values for a specific year', async () => {
+    axios.get.mockResolvedValue([]);
+
+    const valuesFromYear = await CurrencyService.getCurrencyValuesFromYear(
+      2020
+    );
   });
   it('Should only retrieve the specified currency', async () => {
+    expect.assertions(4);
+
     const currencyResponseGenerator = (currency = '') => ({ codigo: currency });
 
-    const ufResponse = await CurrencyService.getCurrencyValuesFromLastMonth(
-      'uf'
+    axios.get
+      .mockResolvedValueOnce(currencyResponseGenerator('uf'))
+      .mockResolvedValueOnce(currencyResponseGenerator('dolar'));
+
+    const ufValues = await CurrencyService.getCurrencyValuesFromLastMonth('uf');
+    const dolarValues = await CurrencyService.getCurrencyValuesFromLastMonth(
+      'dolar'
     );
+
+    expect(ufValues.codigo).toBe('uf');
+    expect(ufValues.codigo).not.toBe('dolar');
+    expect(dolarValues.codigo).toBe('dolar');
+    expect(dolarValues.codigo).not.toBe('uf');
   });
 });
