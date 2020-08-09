@@ -22,7 +22,8 @@ export const actions = {
       currency
     );
 
-    commit('SET_CURRENCY_VALUES', response.data);
+    const sortedResponse = { ...response, serie: response.serie.reverse() };
+    commit('SET_CURRENCY_VALUES', sortedResponse);
   },
   async getAllCurrencies({ commit }) {
     const response = await CurrencyService.getCurrenciesState();

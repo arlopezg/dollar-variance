@@ -17,8 +17,8 @@ export default {
     }
   },
   async getCurrencyValuesFromLastMonth(currency = 'dolar') {
-    const valuesFromLastMonth = await axios.get(`${API.baseURL}/${currency}`);
-    return valuesFromLastMonth;
+    const response = await axios.get(`${API.baseURL}/${currency}`);
+    return response.data;
   },
   async getCurrencyValuesFromYear(
     currency = 'dolar',
