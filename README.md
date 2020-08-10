@@ -6,6 +6,8 @@ The objective of this exercise is to develop a graph showing the daily variation
 
 The chosen API was [mindicador.cl](https://mindicador.cl/), which delivers the price for a specified time range for the American dollar relative to the Chilean peso.
 
+This app was created through Create Nuxt App to speed up development and follow the Nuxt team's recommended practices.
+
 ##  👨🏻‍💻 Tech, libraries and tools:
 
 - Main Javascript framework: VueJS + NuxtJS
