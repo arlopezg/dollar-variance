@@ -2,7 +2,7 @@
   <div>
     <div class="flex my-2">
       <Select class="w-full mr-2" v-model="query.from" :options="years">
-        <option :value="null">Desde</option>
+        <option :value="undefined">Desde</option>
       </Select>
       <Select
         class="w-full"
@@ -10,7 +10,7 @@
         v-model="query.to"
         :options="toYear"
       >
-        <option :value="null">Hasta</option>
+        <option :value="undefined">Hasta</option>
       </Select>
     </div>
 
@@ -30,7 +30,7 @@ import DateService from '~/services/DateService';
 export default {
   data() {
     return {
-      query: { from: null, to: null },
+      query: { from: undefined, to: undefined },
       years: this.fromYear()
     };
   },
@@ -61,7 +61,7 @@ export default {
         const { from, to } = this.query;
 
         if (from > to) {
-          this.query.to = null;
+          this.query.to = undefined;
         }
         this.$emit('onDateChange', this.query);
       }
