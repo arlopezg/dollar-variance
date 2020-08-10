@@ -1,4 +1,5 @@
 # Technical Interview - Frontend Developer
+
 ##### Alejandro López
 
 The objective of this exercise is to develop a graph showing the daily variation of the dollar, relative to the Chilean peso, for 2019 and 2020. You can also see check out the prices for every year since 1999.
@@ -6,6 +7,7 @@ The objective of this exercise is to develop a graph showing the daily variation
 The chosen API was [mindicador.cl](https://mindicador.cl/), which delivers the price for a specified time range for the American dollar relative to the Chilean peso.
 
 ### Tech, libraries and tools:
+
 - Main Javascript framework: VueJS + NuxtJS
 - State management: Vuex
 - CSS Framework: TailwindCSS
@@ -14,10 +16,11 @@ The chosen API was [mindicador.cl](https://mindicador.cl/), which delivers the p
 - HTTP Requests: Axios
 - Transpiled with Babel and linted with ESLint + Husky + Lint staged
 - Deployed with Netlify to https://variance.netlify.app
-- Illustrations by [freepik](https://www.flaticon.com/authors/freepik) and [Undraw.co](https://undraw.co)
+- Illustrations by [freepik](https://www.flaticon.com/authors/freepik) and [undraw.co](https://undraw.co)
 
 ## Build Setup
-This app is automagically deployed on every push thanks to Netlify. You can access it direcly by[clicking here](https://variance.netlify.app), or you can follow the regular NuxtJS instructions:
+
+This app is automagically deployed on every push thanks to Netlify. You can access it direcly by [clicking here](https://variance.netlify.app), or you can follow the regular NuxtJS instructions:
 
 ```bash
 # install dependencies
