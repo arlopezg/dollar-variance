@@ -34,44 +34,57 @@ describe('CurrencyService', () => {
   it(`Should retrieve USD last month's values`, async () => {
     expect.assertions(2);
 
-    const data = {
-      codigo: 'dolar',
-      unidad_medida: 'Pesos',
-      serie: [{ valor: 123 }, { valor: 456 }, { valor: 789 }]
+    const expectedResponse = {
+      data: {
+        codigo: 'dolar',
+        unidad_medida: 'Pesos',
+        serie: [{ valor: 123 }, { valor: 456 }, { valor: 789 }]
+      }
     };
 
-    axios.get.mockResolvedValue(data);
-    const valuesFromLastMonth = await CurrencyService.getCurrencyValuesFromLastMonth(
-      ''
-    );
+    axios.get.mockResolvedValue(expectedResponse);
 
-    expect(valuesFromLastMonth.codigo).toBe('dolar');
-    expect(Array.isArray(valuesFromLastMonth.serie)).toBe(true);
+    const response = await CurrencyService.getValuesFromLastMonth('dolar');
+
+    expect(response.codigo).toBe('dolar');
+    expect(Array.isArray(response.serie)).toBe(true);
   });
-  it('Should retrieve currency values for a specific year', async () => {
-    axios.get.mockResolvedValue([]);
+  it('Should throw an error when requesting an invalid currency', async () => {
+    axios.get.mockRejectedValueOnce(new Error(500));
 
-    const valuesFromYear = await CurrencyService.getCurrencyValuesFromYear(
-      2020
-    );
+    await expect(
+      CurrencyService.getValuesFromLastMonth('simoleon')
+    ).rejects.toThrow();
   });
-  it('Should only retrieve the specified currency', async () => {
-    expect.assertions(4);
 
-    const currencyResponseGenerator = (currency = '') => ({ codigo: currency });
+  describe('Requesting year ranges', () => {
+    it('Should throw on missing range values', async () => {
+      await expect(
+        CurrencyService.getValuesFromYearRange('dolar', [1000, undefined])
+      ).rejects.toThrow();
+    });
+    it('Should retrieve all values from a range', async () => {
+      const currency = 'dollar';
+      const range = [2000, 2002];
 
-    axios.get
-      .mockResolvedValueOnce(currencyResponseGenerator('uf'))
-      .mockResolvedValueOnce(currencyResponseGenerator('dolar'));
+      const serie1 = [{ valor: 123 }, { valor: 345 }];
+      const serie2 = [{ valor: 456 }, { valor: 678 }];
+      const serie3 = [{ valor: 100 }, { valor: 200 }];
 
-    const ufValues = await CurrencyService.getCurrencyValuesFromLastMonth('uf');
-    const dolarValues = await CurrencyService.getCurrencyValuesFromLastMonth(
-      'dolar'
-    );
+      const expectedResponse = {
+        range,
+        serie: [...serie1, ...serie2, ...serie3]
+      };
 
-    expect(ufValues.codigo).toBe('uf');
-    expect(ufValues.codigo).not.toBe('dolar');
-    expect(dolarValues.codigo).toBe('dolar');
-    expect(dolarValues.codigo).not.toBe('uf');
+      axios.get.mockResolvedValue(expectedResponse);
+
+      const response = await CurrencyService.getValuesFromYearRange(
+        currency,
+        range
+      );
+
+      expect(response.range).toBe(expectedResponse.range);
+      expect(response.serie).toBe(expectedResponse.serie);
+    });
   });
 });

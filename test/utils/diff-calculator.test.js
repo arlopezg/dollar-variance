@@ -12,7 +12,7 @@ describe('Difference calculator for currencies', () => {
     expect(() => diffCalculator(invalidValues)).toThrow();
   });
   it('Should return the difference between a series of numbers', () => {
-    const expectedDiff = [0, 1, 3, 5, -20].map((item) => item.toFixed(2));
+    const expectedDiff = [0, 1, 3, 5, -20].map((item) => item.toFixed(1));
     expect(diffCalculator(values)).toStrictEqual(expectedDiff);
   });
 });
