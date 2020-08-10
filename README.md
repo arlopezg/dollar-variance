@@ -6,7 +6,7 @@ The objective of this exercise is to develop a graph showing the daily variation
 
 The chosen API was [mindicador.cl](https://mindicador.cl/), which delivers the price for a specified time range for the American dollar relative to the Chilean peso.
 
-### Tech, libraries and tools:
+##  👨🏻‍💻 Tech, libraries and tools:
 
 - Main Javascript framework: VueJS + NuxtJS
 - State management: Vuex
@@ -18,7 +18,7 @@ The chosen API was [mindicador.cl](https://mindicador.cl/), which delivers the p
 - Deployed with Netlify to https://variance.netlify.app
 - Illustrations by [freepik](https://www.flaticon.com/authors/freepik) and [undraw.co](https://undraw.co)
 
-## Build Setup
+## 🛠 Build Setup
 
 This app is automagically deployed on every push thanks to Netlify. You can access it direcly by [clicking here](https://variance.netlify.app), or you can follow the regular NuxtJS instructions:
 
@@ -39,7 +39,7 @@ $ yarn generate
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
 
-#### Known Issues
+## 🐛 Known Issues
 
 - On mobile devices, viewing too large a range of years will crash the browser tab. This is most likely a performance issue with ChartJS - should be solved by rendering simpler charts or by reducing the amount of data points that are shown at once.
 - GitHub CI workflows are not passing `build` step. There is an issue with `nuxtjs/eslint-module` not being found, not sure why. Works just fine in Netlify and local environment.
