@@ -18,9 +18,7 @@ export const mutations = {
 
 export const actions = {
   async getCurrencyValues({ commit }, currency = 'dolar') {
-    const response = await CurrencyService.getCurrencyValuesFromLastMonth(
-      currency
-    );
+    const response = await CurrencyService.getValuesFromLastMonth(currency);
 
     const sortedResponse = { ...response, serie: response.serie.reverse() };
     commit('SET_CURRENCY_VALUES', sortedResponse);
@@ -32,5 +30,24 @@ export const actions = {
       (currency) => typeof currency === 'object'
     );
     commit('SET_ALL_CURRENCIES', filteredCurrencies);
+  },
+  async getValuesFromYears({ commit }, yearRange = []) {
+    const [start, end] = yearRange;
+    if (start && !end) {
+      const singleYear = await CurrencyService.getValuesFromYear(
+        'dolar',
+        start
+      );
+      commit('SET_CURRENCY_VALUES', { serie: singleYear.flat() });
+      return singleYear;
+    }
+
+    const range = await CurrencyService.getValuesFromYearRange(
+      'dolar',
+      yearRange
+    );
+
+    commit('SET_CURRENCY_VALUES', range);
+    return range;
   }
 };
