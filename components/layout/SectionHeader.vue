@@ -1,6 +1,5 @@
 <template>
   <div>
-    <fa v-if="icon" :icon="['fas', icon]" />
     <component
       :is="'h' + heading"
       class="section-header font-bold inline"
@@ -15,7 +14,6 @@
 export default {
   props: {
     title: { type: String, required: true },
-    icon: { type: String, default: '' },
     heading: { type: Number, default: 2 },
     fontSize: {
       type: String,
