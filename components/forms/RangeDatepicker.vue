@@ -61,7 +61,7 @@ export default {
         const { from, to } = this.query;
 
         if (from > to) {
-          this.query.to = undefined;
+          delete this.query.to;
         }
         this.$emit('onDateChange', this.query);
       }

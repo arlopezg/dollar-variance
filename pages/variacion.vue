@@ -8,9 +8,10 @@
         alt="Búsqueda por rango de fechas"
       />
     </main>
-    <aside class="w-full md:w-1/5 p-5">
+    <aside class="w-full md:w-1/5 p-5 relative">
       <strong>Búsqueda por año</strong>
       <RangeDatepicker @onDateChange="setQuery" @clear="clearCurrency" />
+      <Spinner v-show="loading" class="absolute left-0 right-0" />
     </aside>
   </article>
 </template>
@@ -25,6 +26,7 @@ import requiredParam from '~/utils/validation/required-param';
 export default {
   data() {
     return {
+      loading: false,
       updateTime: this.getUpdateTime()
     };
   },
@@ -68,9 +70,14 @@ export default {
         return;
       }
 
-      this.getValuesFromYears([query.from, query.to]).then(
-        () => (this.updateTime = this.getUpdateTime())
-      );
+      this.loading = true;
+      this.getValuesFromYears([query.from, query.to])
+        .then(() => {
+          this.updateTime = this.getUpdateTime();
+        })
+        .finally(() => {
+          this.loading = false;
+        });
     }
   }
 };
