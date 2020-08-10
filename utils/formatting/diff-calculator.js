@@ -1,7 +1,7 @@
 import numberFormatter from '~/utils/formatting/number-formatter';
 
 export default function (values = []) {
-  const hasInvalidValues = values.some((value) => typeof value !== 'number');
+  const hasInvalidValues = values.some((value) => isNaN(value));
 
   if (hasInvalidValues) {
     throw new Error('Every value must be a number');
