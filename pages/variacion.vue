@@ -1,89 +1,77 @@
 <template>
-  <article
-    class="flex flex-col-reverse md:flex-row justify-center items-center"
-  >
-    <main class="relative max-h-screen w-full md:w-1/2">
-      <line-chart
-        v-if="currencyData"
-        :data="currencyData"
-        :options="chartOptions"
+  <article class="flex flex-col md:flex-row justify-center items-center">
+    <main class="relative max-h-screen w-full md:w-1/2 p-4">
+      <line-chart v-if="dataset" :data="dataset" :key="updateTime" />
+      <img
+        v-else
+        src="/undraw/datepicker.svg"
+        alt="Búsqueda por rango de fechas"
       />
     </main>
-    <aside class="w-full md:w-1/6 flex flex-col">
-      <strong>Buscador por año</strong>
-      <label>
-        <strong>Desde</strong>
-      </label>
-      <label>
-        <strong>Hasta</strong>
-      </label>
+    <aside class="w-full md:w-1/5 p-5">
+      <strong>Búsqueda por año</strong>
+      <RangeDatepicker @onDateChange="setQuery" @clear="clearCurrency" />
     </aside>
   </article>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapMutations, mapState } from 'vuex';
 import moment from 'moment';
 
 import diffCalculator from '~/utils/formatting/diff-calculator';
-import numberFormat from '~/utils/formatting/number-formatter';
 import requiredParam from '~/utils/validation/required-param';
 
 export default {
   data() {
     return {
-      chartOptions: {
-        responsive: true,
-        scales: {
-          xAxes: [
-            {
-              gridLines: { display: false },
-              ticks: { maxTicksLimit: 5 }
-            }
-          ],
-          yAxes: [
-            {
-              ticks: {
-                callback(label) {
-                  return numberFormat(label, {
-                    style: 'currency',
-                    currency: 'CLP'
-                  });
-                }
-              }
-            }
-          ]
-        }
-      }
+      updateTime: this.getUpdateTime()
     };
   },
   computed: {
     ...mapState('currency', ['currency']),
-    currencyData() {
+    dataset() {
       if (!this.currency) {
         return null;
       }
 
       const { serie } = this.currency;
+      const valuesFromSeries = serie.map((item) => item.valor);
       return {
         labels: serie.map((item) => moment(item.fecha).format('DD-MMM-YYYY')),
         datasets: [
           {
             label: `Variación diaria`,
-            data: diffCalculator(serie.map((item) => item.valor)),
+            data: diffCalculator(valuesFromSeries),
             backgroundColor: 'transparent',
-            pointBackgroundColor: 'lightblue',
-            borderColor: 'lightblue'
+            pointBackgroundColor: 'transparent',
+            pointBorderColor: 'transparent',
+            borderColor: 'lightblue',
+            borderWidth: 2,
+            hoverRadius: 30
           }
         ]
       };
     }
   },
   methods: {
-    ...mapActions('currency', ['getCurrencyValues'])
-  },
-  mounted() {
-    this.getCurrencyValues(this.$route.params.id);
+    ...mapMutations('currency', ['SET_CURRENCY_VALUES']),
+    ...mapActions('currency', ['getCurrencyValues', 'getValuesFromYears']),
+    getUpdateTime() {
+      return new Date().getTime();
+    },
+    clearCurrency() {
+      this.SET_CURRENCY_VALUES(null);
+    },
+    setQuery(query = {}) {
+      if (!query.from) {
+        return;
+      }
+
+      this.getValuesFromYears([query.from, query.to]).then(
+        () => (this.updateTime = this.getUpdateTime())
+      );
+    }
   }
 };
 </script>
