@@ -2,7 +2,7 @@
   <div>
     <div class="flex my-2">
       <Select class="w-full mr-2" v-model="query.from" :options="years">
-        <option :value="undefined">Desde</option>
+        <option :value="null">Desde</option>
       </Select>
       <Select
         class="w-full"
@@ -10,7 +10,7 @@
         v-model="query.to"
         :options="toYear"
       >
-        <option :value="undefined">Hasta</option>
+        <option :value="null">Hasta</option>
       </Select>
     </div>
 
@@ -57,8 +57,13 @@ export default {
   watch: {
     query: {
       deep: true,
-      handler(value = {}) {
-        this.$emit('onDateChange', value);
+      handler() {
+        const { from, to } = this.query;
+
+        if (from > to) {
+          this.query.to = null;
+        }
+        this.$emit('onDateChange', this.query);
       }
     }
   }
