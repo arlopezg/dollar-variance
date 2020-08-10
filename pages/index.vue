@@ -19,7 +19,9 @@
         <nuxt-link type="button" to="/variacion" class="text-blue-500">
           la fluctuación del dolar americano
         </nuxt-link>
-        los últimos 30 días
+        en el último año, el año pasado <br />
+        o incluso en 1999.
+        <span class="text-xl">🤯</span>
       </p>
 
       <nuxt-link

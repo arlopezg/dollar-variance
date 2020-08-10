@@ -1,6 +1,7 @@
 <template>
-  <div class="min-h-screen flex flex-col justify-between">
-    <Nuxt />
+  <div class="flex flex-col justify-between">
+    <Nuxt class="min-h-screen" />
+    <Footer />
   </div>
 </template>
 
