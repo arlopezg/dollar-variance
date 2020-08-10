@@ -22,7 +22,7 @@ This app was created through Create Nuxt App to speed up development and follow 
 
 ## 🛠 Build Setup
 
-This app is automagically deployed on every push thanks to Netlify. You can access it direcly by [clicking here](https://variance.netlify.app), or you can follow the regular NuxtJS instructions:
+This app is automagically deployed on every push thanks to Netlify. You can access it directly by [clicking here](https://variance.netlify.app), or you can follow the regular NuxtJS instructions:
 
 ```bash
 # install dependencies
