@@ -8,9 +8,9 @@
     "start": "npx nuxt start",
     "export": "npx nuxt generate",
     "serve": "npx nuxt serve",
-    "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "lint:style": "stylelint **/*.{vue,css} --ignore-path .gitignore",
-    "lint": "yarn lint:js && yarn lint:style",
+    "lint:js": "npx eslint --ext .js,.vue --ignore-path .gitignore .",
+    "lint:style": "npx stylelint **/*.{vue,css} --ignore-path .gitignore",
+    "lint": "npx yarn lint:js && yarn lint:style",
     "test": "npx jest"
   },
   "lint-staged": {
