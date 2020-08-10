@@ -38,3 +38,9 @@ $ yarn generate
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+
+#### Known Issues
+
+- On mobile devices, viewing too large a range of years will crash the browser tab. This is most likely a performance issue with ChartJS - should be solved by rendering simpler charts or by reducing the amount of data points that are shown at once.
+- GitHub CI workflows are not passing `build` step. There is an issue with `nuxtjs/eslint-module` not being found, not sure why. Works just fine in Netlify and local environment.
+- In the `CurrencyService` test suite, the following test `Should retrieve all values from a range` is not passing. I need to investigate how to mock the implementation or resolved value of an inner method (maybe a Spy? Stub?).
