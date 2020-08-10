@@ -3,15 +3,15 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "export": "nuxt generate",
-    "serve": "nuxt serve",
+    "dev": "npx nuxt",
+    "build": "npx nuxt build",
+    "start": "npx nuxt start",
+    "export": "npx nuxt generate",
+    "serve": "npx nuxt serve",
     "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "lint:style": "stylelint **/*.{vue,css} --ignore-path .gitignore",
     "lint": "yarn lint:js && yarn lint:style",
-    "test": "jest"
+    "test": "npx jest"
   },
   "lint-staged": {
     "*.{js,vue}": "eslint"
@@ -26,7 +26,7 @@
     "@nuxtjs/pwa": "^3.0.0-beta.20",
     "chart.js": "^2.9.3",
     "moment": "^2.27.0",
-    "nuxt": "^2.14.0",
+    "nuxt": "^2.14.1",
     "vue-chartjs": "^3.5.0"
   },
   "engines": {
