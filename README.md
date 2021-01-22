@@ -1,8 +1,8 @@
-# Technical Interview - Frontend Developer
+# Dollar Variance Watcher
 
-##### Alejandro López
+**Welcome to Dollar Variance Watcher**. DVW is a demo app made by Alejandro with ❤️ and you can access it here: https://variance.netlify.app
 
-The objective of this exercise is to develop a graph showing the daily variation of the dollar, relative to the Chilean peso, for 2019 and 2020. You can also see check out the prices for every year since 1999.
+The objective of this exercise is to develop a graph showing the daily variation of the dollar, relative to the Chilean peso, for every year since 1999.
 
 The chosen API was [mindicador.cl](https://mindicador.cl/), which delivers the price for a specified time range for the American dollar relative to the Chilean peso.
 
