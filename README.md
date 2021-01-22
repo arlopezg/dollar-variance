@@ -2,9 +2,7 @@
 
 **Welcome to Dollar Variance Watcher**. DVW is a demo app made by Alejandro with ❤️.
 
-The objective of this exercise is to develop a graph showing the daily variation of the dollar, relative to the Chilean peso, for every year since 1999.
-
-The chosen API was [mindicador.cl](https://mindicador.cl/), which delivers the price for a specified time range for the American dollar relative to the Chilean peso.
+The objective of this exercise is to develop a graph showing the daily variation of the dollar, relative to the Chilean peso, for every year since 1999. All data comes from an external API ([mindicador.cl](https://mindicador.cl/)) that delivers the USD price for a specified time range.
 
 This app was created through Create Nuxt App to speed up development and follow the Nuxt team's recommended practices.
 
@@ -14,11 +12,11 @@ DVW is automagically deployed thanks to Netlify. It's available here: https://va
 
 ##  👨🏻‍💻 Tech, libraries and tools:
 
-- Main Javascript framework: VueJS + NuxtJS
+- VueJS + NuxtJS
 - State management: Vuex
 - CSS Framework: TailwindCSS
 - Charts: ChartJS
-- Testing: Jest
+- Tests: Jest
 - HTTP Requests: Axios
 - Transpiled with Babel and linted with ESLint + Husky + Lint staged
 - Deployed with Netlify to https://variance.netlify.app
