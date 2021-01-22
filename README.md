@@ -1,5 +1,7 @@
 # Dollar Variance Watcher
 
+💰 + ( 🇺🇸 / 🇨🇱 ) = 📈 
+
 **Welcome to Dollar Variance Watcher**. DVW is a demo app made by Alejandro with ❤️.
 
 The objective of this exercise is to develop a graph showing the daily variation of the dollar, relative to the Chilean peso, for every year since 1999. All data comes from an external API ([mindicador.cl](https://mindicador.cl/)) that delivers the USD price for a specified time range.
