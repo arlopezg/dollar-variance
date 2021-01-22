@@ -1,12 +1,16 @@
 # Dollar Variance Watcher
 
-**Welcome to Dollar Variance Watcher**. DVW is a demo app made by Alejandro with ❤️ and you can access it here: https://variance.netlify.app
+**Welcome to Dollar Variance Watcher**. DVW is a demo app made by Alejandro with ❤️.
 
 The objective of this exercise is to develop a graph showing the daily variation of the dollar, relative to the Chilean peso, for every year since 1999.
 
 The chosen API was [mindicador.cl](https://mindicador.cl/), which delivers the price for a specified time range for the American dollar relative to the Chilean peso.
 
 This app was created through Create Nuxt App to speed up development and follow the Nuxt team's recommended practices.
+
+## Try it now
+
+DVW is automagically deployed thanks to Netlify. It's available here: https://variance.netlify.app.
 
 ##  👨🏻‍💻 Tech, libraries and tools:
 
